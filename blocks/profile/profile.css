@@ -1,0 +1,10 @@
+@import url(./__avatar/profile__avatar.css);
+@import url(./__title/profile__title.css);
+@import url(./__subtitle/profile__subtitle.css);
+
+.profile {
+  display: grid;
+  grid-template-columns: fit-content(120px) 1fr fit-content(150px);
+  align-items: center;
+  gap: 30px;
+}

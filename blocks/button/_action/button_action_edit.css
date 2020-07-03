@@ -1,0 +1,3 @@
+.button_action_edit::after {
+  content: url(../../../images/edit-button.svg);
+}
