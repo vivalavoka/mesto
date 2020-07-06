@@ -1,8 +1,3 @@
-.button_action_edit {
-  border: 1px solid white;
-}
-
-
 .button_action_edit::after {
   content: url(../../../images/edit-button.svg);
 }
