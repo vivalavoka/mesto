@@ -1,0 +1,6 @@
+.profile__info-top {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

@@ -1,3 +1,8 @@
+.button_action_add {
+  border-radius: 2px;
+  border: 2px solid white;
+}
+
 .button_action_add::after {
   content: url(../../../images/add-button.svg);
 }
