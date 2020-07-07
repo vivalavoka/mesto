@@ -4,3 +4,9 @@
   border-radius: 2px;
   border: 2px solid white;
 }
+
+@media (max-width: 425px) {
+  .profile__add-button {
+   width: 100%;
+  }
+}

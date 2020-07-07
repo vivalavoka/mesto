@@ -1,4 +1,13 @@
 .profile__info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 425px) {
+  .profile__info {
+    justify-content: center;
+    align-items: center;
+  }
 }
