@@ -2,4 +2,13 @@
   position: relative;
   top: 0;
   left: 0;
+  width: 142px;
+  height: 33px;
+}
+
+@media (max-width: 425px) {
+  .header__logo {
+    width: 103px;
+    height: 24px;
+  }
 }

@@ -1,7 +1,12 @@
 .page__content {
-  max-width: 1280px;
+  max-width: 882px;
   min-width: 300px;
-  box-sizing: border-box;
   margin: auto;
-  padding: 0 199px;
+  padding: 0 40px;
+}
+
+@media (max-width: 425px) {
+  .page__content {
+    padding: 0 19px;
+  }
 }
