@@ -17,7 +17,7 @@
 
 @media (max-width: 768px) {
   .profile {
-    grid-template-columns: minmax(100px, max-content);
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(3, min-content);
     gap: 36px;
   }
