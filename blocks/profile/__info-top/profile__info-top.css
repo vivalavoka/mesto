@@ -1,4 +1,5 @@
 .profile__info-top {
+  width: 100%;
   margin-bottom: 16px;
   display: flex;
   justify-content: flex-start;

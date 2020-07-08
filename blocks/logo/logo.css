@@ -3,7 +3,7 @@
   background-size: 142px 33px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 425px) {
   .logo {
     background-size: 103px 24px;
   }
