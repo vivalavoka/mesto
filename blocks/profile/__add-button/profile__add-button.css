@@ -5,8 +5,16 @@
   border: 2px solid white;
 }
 
+.profile__add-button::after {
+  background-size: 22px 22px;
+}
+
 @media (max-width: 425px) {
   .profile__add-button {
-   width: 100%;
+    width: 100%;
+  }
+
+  .profile__add-button::after {
+    background-size: 16px 16px;
   }
 }

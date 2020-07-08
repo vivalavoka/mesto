@@ -4,6 +4,10 @@
   border: 1px solid white;
 }
 
+.profile__edit-button::after {
+  background-size: 10px 10px;
+}
+
 @media (max-width: 425px) {
   .profile__edit-button {
     width: 18px;

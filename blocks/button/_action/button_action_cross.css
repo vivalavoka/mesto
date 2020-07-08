@@ -1,0 +1,3 @@
+.button_action_cross::after {
+  background: url(../../../images/add-button-min.svg) no-repeat center center;
+}

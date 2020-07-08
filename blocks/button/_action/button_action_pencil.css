@@ -1,0 +1,3 @@
+.button_action_pencil::after {
+  background: url(../../../images/edit-button-min.svg) no-repeat center center;
+}
