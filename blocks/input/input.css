@@ -3,10 +3,6 @@
     padding: 13px 0;
     border: 0;
     border-bottom: 1px solid #0003;
+    box-sizing: border-box;
     outline: 0;
-}
-
-.input:focus {
-    border: 0;
-    outline: 1px solid #0003;
 }
