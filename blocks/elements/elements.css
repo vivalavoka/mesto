@@ -6,7 +6,7 @@
   column-gap: 18px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .elements {
     grid-template-columns: 1fr;
     margin-bottom: 48px;

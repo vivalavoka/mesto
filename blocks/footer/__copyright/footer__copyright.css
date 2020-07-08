@@ -7,7 +7,7 @@
   font-weight: normal;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .footer__copyright {
     font-size: 14px;
   }
