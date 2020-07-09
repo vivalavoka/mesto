@@ -9,5 +9,6 @@
 @media (max-width: 768px) {
   .profile__info-top {
     justify-content: center;
+    margin-bottom: 16px;
   }
 }
