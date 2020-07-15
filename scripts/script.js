@@ -21,12 +21,12 @@ editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
 
 function formSubmitHandler (evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    profileTitle.textContent = nameInput.value;
-    profileSubtitle.textContent = jobInput.value;
+  profileTitle.textContent = nameInput.value;
+  profileSubtitle.textContent = jobInput.value;
 
-    togglePopup();
+  togglePopup();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
