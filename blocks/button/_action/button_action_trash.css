@@ -1,0 +1,7 @@
+.button_action_trash::after {
+  content: '';
+  background: url(../../../images/trash-min.svg) no-repeat center center;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
