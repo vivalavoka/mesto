@@ -47,6 +47,17 @@ const editFormSubmitHandler = evt => {
   closePopup();
 }
 
+const addFormSubmitHandler = evt => {
+  evt.preventDefault();
+
+  const mainInput = document.querySelector('#main-input').value;
+  const additionalInput = document.querySelector('#additional-input').value;
+
+  addElement(mainInput, additionalInput);
+
+  closePopup();
+}
+
 const addElement = (title, photo) => {
   const template = document.querySelector('#element-template').content;
   const elementList = document.querySelector('.elements');
@@ -56,7 +67,7 @@ const addElement = (title, photo) => {
   element.querySelector('.element__photo').alt = title;
   element.querySelector('.element__photo').src = photo;
 
-  elementList.append(element);
+  elementList.prepend(element);
 }
 
 const fillEditPopup = (popupElement) => {
@@ -83,7 +94,7 @@ const fillAddPopup = (popupElement) => {
   popupElement.querySelector('.popup__title').textContent = 'Новое место';
 
   const formElement = popupElement.querySelector('.popup__form');
-  formElement.addEventListener('submit', formSubmitHandler);
+  formElement.addEventListener('submit', addFormSubmitHandler);
 
   const mainInput = formElement.querySelector('#main-input');
   const additionalInput = formElement.querySelector('#additional-input');
