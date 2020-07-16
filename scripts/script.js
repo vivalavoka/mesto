@@ -78,6 +78,10 @@ const addElement = (title, photo) => {
     }
   });
 
+  element.querySelector('.element__delete').addEventListener('click', evt => {
+    evt.target.closest('.element').remove();
+  });
+
   elementList.prepend(element);
 }
 
