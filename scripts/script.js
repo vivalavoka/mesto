@@ -82,10 +82,15 @@ const addElement = (title, photo) => {
     evt.target.closest('.element').remove();
   });
 
+  element.querySelector('.element__photo-link').addEventListener('click', evt => openPopup(evt.target));
+
   elementList.prepend(element);
 }
 
-const fillEditPopup = (popupElement) => {
+const fillEditPopup = () => {
+  const template = document.querySelector('#popup-template').content;
+  const popupElement = template.cloneNode(true);
+
   popupElement.querySelector('.popup__title').textContent = 'Редактировать профиль';
 
   const formElement = popupElement.querySelector('.popup__form');
@@ -103,9 +108,13 @@ const fillEditPopup = (popupElement) => {
   additionalInput.value = profileSubtitle.textContent;
   mainInput.placeholder = 'Имя';
   additionalInput.placeholder = 'Профессия';
+
+  return popupElement;
 }
 
-const fillAddPopup = (popupElement) => {
+const fillAddPopup = () => {
+  const template = document.querySelector('#popup-template').content;
+  const popupElement = template.cloneNode(true);
   popupElement.querySelector('.popup__title').textContent = 'Новое место';
 
   const formElement = popupElement.querySelector('.popup__form');
@@ -116,27 +125,49 @@ const fillAddPopup = (popupElement) => {
 
   mainInput.placeholder = 'Название';
   additionalInput.placeholder = 'Ссылка на картинку';
+
+  return popupElement;
 }
 
-const openPopup = type => {
-  const template = document.querySelector('#popup-template').content;
-  const pageContent = document.querySelector('.page__content');
-  const popup = template.cloneNode(true);
+const fillPhotoPopup = target => {
+  const template = document.querySelector('#photo-template').content;
+  const popupElement = template.cloneNode(true);
 
-  type === 'edit'
-    ? fillEditPopup(popup)
-    : fillAddPopup(popup)
+  const element = target.closest('.element');
+
+  popupElement.querySelector('.popup__photo').src = target.src;
+  popupElement.querySelector('.popup__photo').alt = target.alt;
+  popupElement.querySelector('.popup__figcaption').textContent = element.querySelector('.element__title').textContent;
+
+  return popupElement;
+}
+
+const openPopup = target => {
+  let popup;
+
+  switch (true) {
+    case target.classList.contains('profile__edit-button'):
+      popup = fillEditPopup();
+      break;
+    case target.classList.contains('profile__add-button'):
+      popup = fillAddPopup()
+      break;
+    case target.classList.contains('element__photo'):
+      popup = fillPhotoPopup(target);
+      break;
+  }
+
   const closeButton = popup.querySelector('.popup__close-button');
   closeButton.addEventListener('click', closePopup);
 
-  pageContent.append(popup);
+  document.querySelector('.page__content').append(popup);
 }
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
-editButton.addEventListener('click', () => openPopup('edit'));
-addButton.addEventListener('click', () => openPopup('add'));
+editButton.addEventListener('click', evt => openPopup(evt.target));
+addButton.addEventListener('click', evt => openPopup(evt.target));
 
 initialCards.forEach(card => {
   addElement(card.name, card.link);
