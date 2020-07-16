@@ -25,44 +25,33 @@ const initialCards = [
   }
 ];
 
-const popupElement = document.querySelector('.popup');
-const formElement = document.querySelector('.popup__form');
+const closePopup = () => {
+  const popupElement = document.querySelector('.popup');
 
-const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
-
-const nameInput = document.querySelector('#name');
-const jobInput =  document.querySelector('#job');
-
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-
-const togglePopup = () => {
-  popupElement.classList.toggle('popup_opened');
-
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
+  popupElement.classList.remove('popup_opened');
+  popupElement.remove();
 }
 
-const formSubmitHandler = evt => {
-    evt.preventDefault();
+const editFormSubmitHandler = evt => {
+  evt.preventDefault();
 
-    profileTitle.textContent = nameInput.value;
-    profileSubtitle.textContent = jobInput.value;
+  const mainInput = document.querySelector('#main-input');
+  const additionalInput = document.querySelector('#additional-input');
 
-    togglePopup();
+  const profileTitle = document.querySelector('.profile__title');
+  const profileSubtitle = document.querySelector('.profile__subtitle');
+
+  profileTitle.textContent = mainInput.value;
+  profileSubtitle.textContent = additionalInput.value;
+
+  closePopup();
 }
-
-editButton.addEventListener('click', togglePopup);
-closeButton.addEventListener('click', togglePopup);
-
-formElement.addEventListener('submit', formSubmitHandler);
-
-const template = document.querySelector('#element-template').content;
-const elementList = document.querySelector('.elements');
 
 const addElement = (title, photo) => {
+  const template = document.querySelector('#element-template').content;
+  const elementList = document.querySelector('.elements');
   const element = template.cloneNode(true);
+
   element.querySelector('.element__title').textContent = title;
   element.querySelector('.element__photo').alt = title;
   element.querySelector('.element__photo').src = photo;
@@ -70,8 +59,59 @@ const addElement = (title, photo) => {
   elementList.append(element);
 }
 
+const fillEditPopup = (popupElement) => {
+  popupElement.querySelector('.popup__title').textContent = 'Редактировать профиль';
+
+  const formElement = popupElement.querySelector('.popup__form');
+
+  // const formElement = formElement.querySelector('.popup__submit');
+  formElement.addEventListener('submit', editFormSubmitHandler);
+
+  const mainInput = formElement.querySelector('#main-input');
+  const additionalInput = formElement.querySelector('#additional-input');
+
+  const profileTitle = document.querySelector('.profile__title');
+  const profileSubtitle = document.querySelector('.profile__subtitle');
+
+  mainInput.value = profileTitle.textContent;
+  additionalInput.value = profileSubtitle.textContent;
+  mainInput.placeholder = 'Имя';
+  additionalInput.placeholder = 'Профессия';
+}
+
+const fillAddPopup = (popupElement) => {
+  popupElement.querySelector('.popup__title').textContent = 'Новое место';
+
+  const formElement = popupElement.querySelector('.popup__form');
+  formElement.addEventListener('submit', formSubmitHandler);
+
+  const mainInput = formElement.querySelector('#main-input');
+  const additionalInput = formElement.querySelector('#additional-input');
+
+  mainInput.placeholder = 'Название';
+  additionalInput.placeholder = 'Ссылка на картинку';
+}
+
+const openPopup = type => {
+  const template = document.querySelector('#popup-template').content;
+  const pageContent = document.querySelector('.page__content');
+  const popup = template.cloneNode(true);
+
+  type === 'edit'
+    ? fillEditPopup(popup)
+    : fillAddPopup(popup)
+  const closeButton = popup.querySelector('.popup__close-button');
+  closeButton.addEventListener('click', closePopup);
+
+  pageContent.append(popup);
+}
+
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+
+editButton.addEventListener('click', () => openPopup('edit'));
+addButton.addEventListener('click', () => openPopup('add'));
+
 initialCards.forEach(card => {
   addElement(card.name, card.link);
 })
-
-

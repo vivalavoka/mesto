@@ -31,29 +31,20 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <!-- <section class="popup">
+  </div>
+  <template id="popup-template">
+    <section class="popup popup_opened">
       <div class="popup__container">
         <button type="button" class="button button_action_cross popup__close-button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
+        <h2 class="popup__title"></h2>
         <form class="popup__form" method="GET">
-          <input name="name" id="name" class="input popup__input" type="text" value="Жак-Ив Кусто">
-          <input name="job" id="job" class="input popup__input" type="text" value="Исследователь океана">
-          <button type="button" class="button popup__submit" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </section> -->
-    <section class="popup">
-      <div class="popup__container">
-        <button type="button" class="button button_action_cross popup__close-button"></button>
-        <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" method="GET">
-          <input name="name" id="name" class="input popup__input" type="text" placeholder="Название">
-          <input name="job" id="job" class="input popup__input" type="text" placeholder="Ссылка на картинку">
+          <input name="main" id="main-input" class="input popup__input" type="text" value="">
+          <input name="additional" id="additional-input" class="input popup__input" type="text" value="">
           <button type="button" class="button popup__submit" type="submit">Сохранить</button>
         </form>
       </div>
     </section>
-  </div>
+  </template>
   <template id="element-template">
     <article class="element">
       <img class="element__photo" src="" alt="">
