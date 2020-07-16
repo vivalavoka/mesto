@@ -67,6 +67,17 @@ const addElement = (title, photo) => {
   element.querySelector('.element__photo').alt = title;
   element.querySelector('.element__photo').src = photo;
 
+  element.querySelector('.element__like').addEventListener('click', evt => {
+    const classList = evt.target.classList;
+    if (classList.contains('button_action_empty-heart')) {
+      classList.remove('button_action_empty-heart');
+      classList.add('button_action_fill-heart');
+    } else {
+      classList.remove('button_action_fill-heart');
+      classList.add('button_action_empty-heart');
+    }
+  });
+
   elementList.prepend(element);
 }
 
