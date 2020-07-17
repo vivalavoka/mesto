@@ -59,11 +59,13 @@
   </template>
   <template id="photo-template">
     <section class="popup popup_opened">
-      <figure class="popup__figure">
+      <div class="popup__figure-container">
         <button type="button" class="button button_action_cross popup__close-button"></button>
-        <img class="popup__photo" src="" alt="">
-        <figcaption class="popup__figcaption"></figcaption>
-      </figure>
+        <figure class="popup__figure">
+          <img class="popup__photo" src="" alt="">
+          <figcaption class="popup__figcaption"></figcaption>
+        </figure>
+      </div>
     </section>
   </template>
   <script src="./scripts/script.js"></script>
