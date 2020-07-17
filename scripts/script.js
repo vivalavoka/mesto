@@ -92,6 +92,7 @@ const fillEditPopup = () => {
   const popupElement = template.cloneNode(true);
 
   popupElement.querySelector('.popup__title').textContent = 'Редактировать профиль';
+  popupElement.querySelector('.popup__submit').textContent = 'Сохранить';
 
   const formElement = popupElement.querySelector('.popup__form');
 
@@ -116,6 +117,7 @@ const fillAddPopup = () => {
   const template = document.querySelector('#popup-template').content;
   const popupElement = template.cloneNode(true);
   popupElement.querySelector('.popup__title').textContent = 'Новое место';
+  popupElement.querySelector('.popup__submit').textContent = 'Создать';
 
   const formElement = popupElement.querySelector('.popup__form');
   formElement.addEventListener('submit', addFormSubmitHandler);
