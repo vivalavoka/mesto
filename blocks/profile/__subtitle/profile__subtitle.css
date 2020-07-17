@@ -5,9 +5,17 @@
   font-size: 18px;
   font-weight: normal;
   line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
+  .profile__subtitle {
+    text-align: center;
+  }
+}
+@media (max-width: 425px) {
   .profile__subtitle {
     font-size: 14px;
   }

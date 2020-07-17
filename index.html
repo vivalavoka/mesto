@@ -9,82 +9,65 @@
 <body class="page">
   <div class="page__content">
     <header class="header">
-      <div class="logo header__logo">
+      <div class="logo header__logo"></div>
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.png">
+        <img class="profile__avatar" src="./images/avatar.png" alt="Аватар ">
         <article class="profile__info">
           <div class="profile__info-top">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="button button_action_pencil profile__edit-button"></button>
+            <button type="button" class="button button_action_pencil profile__edit-button"></button>
           </div>
           <div class="profile__info-bottom">
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </article>
-        <button class="button button_action_cross profile__add-button"></button>
+        <button type="button" class="button button_action_cross profile__add-button"></button>
       </section>
       <section class="elements">
-        <article class="element">
-          <img class="element__photo" src="./images/karachaevsk.png" alt="Карачаево-Черкесия">
-          <div class="element__panel">
-            <h2 class="element__title">Карачаево-Черкесия</h2>
-            <div class="element__like"></div>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__photo" src="./images/elbrus.png" alt="Эльбрус">
-          <div class="element__panel">
-            <h2 class="element__title">Эльбрус</h2>
-            <div class="element__like"></div>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__photo" src="./images/dombai.png" alt="Домбай">
-          <div class="element__panel">
-            <h2 class="element__title">Домбай</h2>
-            <div class="element__like"></div>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__photo" src="./images/elbrus.png" alt="Эльбрус">
-          <div class="element__panel">
-            <h2 class="element__title">Эльбрус</h2>
-            <div class="element__like"></div>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__photo" src="./images/dombai.png" alt="Домбай">
-          <div class="element__panel">
-            <h2 class="element__title">Домбай</h2>
-            <div class="element__like"></div>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__photo" src="./images/karachaevsk.png" alt="Карачаево-Черкесия">
-          <div class="element__panel">
-            <h2 class="element__title">Карачаево-Черкесия</h2>
-            <div class="element__like"></div>
-          </div>
-        </article>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
+  </div>
+  <template id="popup-template">
+    <section class="popup popup_opened">
       <div class="popup__container">
-        <button class="button button_action_cross popup__close-button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
+        <button type="button" class="button button_action_cross popup__close-button"></button>
+        <h2 class="popup__title"></h2>
         <form class="popup__form" method="GET">
-          <input name="name" id="name" class="input popup__input" type="text" value="Жак-Ив Кусто">
-          <input name="job" id="job" class="input popup__input" type="text" value="Исследователь океана">
-          <button class="button popup__submit" type="submit">Сохранить</button>
+          <input name="main" id="main-input" class="input popup__input" type="text" value="">
+          <input name="additional" id="additional-input" class="input popup__input" type="text" value="">
+          <button class="button popup__submit" type="submit"></button>
         </form>
       </div>
     </section>
-  </div>
+  </template>
+  <template id="element-template">
+    <article class="element">
+      <a href="#" class="element__photo-link">
+        <img class="element__photo" src="" alt="">
+      </a>
+      <div class="button button_action_trash element__delete"></div>
+      <div class="element__panel">
+        <h2 class="element__title"></h2>
+        <div class="button button_action_empty-heart element__like"></div>
+      </div>
+    </article>
+  </template>
+  <template id="photo-template">
+    <section class="popup popup_opened">
+      <div class="popup__figure-container">
+        <button type="button" class="button button_action_cross popup__close-button"></button>
+        <figure class="popup__figure">
+          <img class="popup__photo" src="" alt="">
+          <figcaption class="popup__figcaption"></figcaption>
+        </figure>
+      </div>
+    </section>
+  </template>
   <script src="./scripts/script.js"></script>
 </body>
 </html>

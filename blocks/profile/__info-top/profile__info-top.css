@@ -1,6 +1,14 @@
 .profile__info-top {
+  width: 100%;
   margin-bottom: 16px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .profile__info-top {
+    justify-content: center;
+    margin-bottom: 16px;
+  }
 }

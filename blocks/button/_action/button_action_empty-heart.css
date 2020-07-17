@@ -1,0 +1,7 @@
+.button_action_empty-heart::after {
+  content: '';
+  background: url(../../../images/like-min.svg) no-repeat center center;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
