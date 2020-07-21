@@ -32,9 +32,6 @@ const closePopup = popup => {
 const editFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  const profileTitle = document.querySelector('.profile__title');
-  const profileSubtitle = document.querySelector('.profile__subtitle');
-
   profileTitle.textContent = profileName.value;
   profileSubtitle.textContent = profileJob.value;
 
@@ -44,15 +41,17 @@ const editFormSubmitHandler = evt => {
 const addFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  addElement(elementTitle.value, elementLink.value);
+  renderElement(createCard(elementTitle.value, elementLink.value));
 
   closePopup(elementPopup);
 }
 
-const addElement = (title, photo) => {
-  const template = document.querySelector('#element-template').content;
-  const elementList = document.querySelector('.elements');
-  const element = template.cloneNode(true);
+const renderElement = element => {
+  elementList.prepend(element);
+}
+
+const createCard = (title, photo) => {
+  const element = elementTemplate.cloneNode(true);
 
   element.querySelector('.element__title').textContent = title;
   element.querySelector('.element__photo').alt = title;
@@ -75,12 +74,12 @@ const addElement = (title, photo) => {
 
   element.querySelector('.element__photo-link').addEventListener('click', evt => openPopup(evt.target));
 
-  elementList.prepend(element);
+  return element;
 }
 
 const fillEditPopup = () => {
-  profileName.value = document.querySelector('.profile__title').textContent;
-  profileJob.value = document.querySelector('.profile__subtitle').textContent;
+  profileName.value = profileTitle.textContent;
+  profileJob.value = profileSubtitle.textContent;
 
   return profilePopup;
 }
@@ -117,6 +116,14 @@ const openPopup = target => {
 const editButton = document.querySelector('.profile__edit-button').addEventListener('click', evt => openPopup(evt.target));
 const addButton = document.querySelector('.profile__add-button').addEventListener('click', evt => openPopup(evt.target));
 
+// Initialize element template
+const elementList = document.querySelector('.elements');
+const elementTemplate = document.querySelector('#element-template').content;
+
+// Initialize profile output
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
+
 // Profile popup part
 const profilePopup = document.querySelector('.page__popup-profile');
 profilePopup.querySelector('.popup__form').addEventListener('submit', editFormSubmitHandler);
@@ -137,5 +144,5 @@ photoPopup.querySelector('.popup__close-button').addEventListener('click', () =>
 
 // Initialize existing cards
 initialCards.forEach(card => {
-  addElement(card.name, card.link);
+  renderElement(createCard(card.name, card.link));
 })
