@@ -25,18 +25,15 @@ const initialCards = [
   }
 ];
 
-const closePopup = () => {
-  const popupElement = document.querySelector('.popup');
-
-  popupElement.classList.remove('popup_opened');
-  popupElement.remove();
+const closePopup = popup => {
+  popup.classList.remove('popup_opened');
 }
 
 const editFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  const mainInput = document.querySelector('#main-input');
-  const additionalInput = document.querySelector('#additional-input');
+  const mainInput = document.querySelector('#profile-name');
+  const additionalInput = document.querySelector('#profile-job');
 
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -44,18 +41,18 @@ const editFormSubmitHandler = evt => {
   profileTitle.textContent = mainInput.value;
   profileSubtitle.textContent = additionalInput.value;
 
-  closePopup();
+  closePopup(document.querySelector('.page__popup-profile'));
 }
 
 const addFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  const mainInput = document.querySelector('#main-input').value;
-  const additionalInput = document.querySelector('#additional-input').value;
+  const mainInput = document.querySelector('#element-title').value;
+  const additionalInput = document.querySelector('#element-link').value;
 
   addElement(mainInput, additionalInput);
 
-  closePopup();
+  closePopup(document.querySelector('.page__popup-element'));
 }
 
 const addElement = (title, photo) => {
@@ -88,60 +85,43 @@ const addElement = (title, photo) => {
 }
 
 const fillEditPopup = () => {
-  const template = document.querySelector('#popup-template').content;
-  const popupElement = template.cloneNode(true);
+  const popup = document.querySelector('.page__popup-profile');
 
-  popupElement.querySelector('.popup__title').textContent = 'Редактировать профиль';
-  popupElement.querySelector('.popup__submit').textContent = 'Сохранить';
+  const formElement = popup.querySelector('.popup__form');
 
-  const formElement = popupElement.querySelector('.popup__form');
-
-  // const formElement = formElement.querySelector('.popup__submit');
   formElement.addEventListener('submit', editFormSubmitHandler);
 
-  const mainInput = formElement.querySelector('#main-input');
-  const additionalInput = formElement.querySelector('#additional-input');
+  const mainInput = formElement.querySelector('#profile-name');
+  const additionalInput = formElement.querySelector('#profile-job');
 
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
 
   mainInput.value = profileTitle.textContent;
   additionalInput.value = profileSubtitle.textContent;
-  mainInput.placeholder = 'Имя';
-  additionalInput.placeholder = 'Профессия';
 
-  return popupElement;
+  return popup;
 }
 
 const fillAddPopup = () => {
-  const template = document.querySelector('#popup-template').content;
-  const popupElement = template.cloneNode(true);
-  popupElement.querySelector('.popup__title').textContent = 'Новое место';
-  popupElement.querySelector('.popup__submit').textContent = 'Создать';
+  const popup = document.querySelector('.page__popup-element');
 
-  const formElement = popupElement.querySelector('.popup__form');
+  const formElement = popup.querySelector('.popup__form');
   formElement.addEventListener('submit', addFormSubmitHandler);
 
-  const mainInput = formElement.querySelector('#main-input');
-  const additionalInput = formElement.querySelector('#additional-input');
-
-  mainInput.placeholder = 'Название';
-  additionalInput.placeholder = 'Ссылка на картинку';
-
-  return popupElement;
+  return popup;
 }
 
 const fillPhotoPopup = target => {
-  const template = document.querySelector('#photo-template').content;
-  const popupElement = template.cloneNode(true);
+  const popup = document.querySelector('.page__popup-photo');
 
   const element = target.closest('.element');
 
-  popupElement.querySelector('.popup__photo').src = target.src;
-  popupElement.querySelector('.popup__photo').alt = target.alt;
-  popupElement.querySelector('.popup__figcaption').textContent = element.querySelector('.element__title').textContent;
+  popup.querySelector('.popup__photo').src = target.src;
+  popup.querySelector('.popup__photo').alt = target.alt;
+  popup.querySelector('.popup__figcaption').textContent = element.querySelector('.element__title').textContent;
 
-  return popupElement;
+  return popup;
 }
 
 const openPopup = target => {
@@ -160,9 +140,9 @@ const openPopup = target => {
   }
 
   const closeButton = popup.querySelector('.popup__close-button');
-  closeButton.addEventListener('click', closePopup);
+  closeButton.addEventListener('click', () => closePopup(popup));
 
-  document.querySelector('.page__content').append(popup);
+  popup.classList.add('popup_opened');
 }
 
 const editButton = document.querySelector('.profile__edit-button');

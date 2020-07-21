@@ -32,19 +32,37 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <template id="popup-template">
-    <section class="popup popup_opened">
-      <div class="popup__container">
-        <button type="button" class="button button_action_cross popup__close-button"></button>
-        <h2 class="popup__title"></h2>
-        <form class="popup__form" method="GET">
-          <input name="main" id="main-input" class="input popup__input" type="text" value="">
-          <input name="additional" id="additional-input" class="input popup__input" type="text" value="">
-          <button class="button popup__submit" type="submit"></button>
-        </form>
-      </div>
-    </section>
-  </template>
+  <section class="popup page__popup-profile">
+    <div class="popup__container">
+      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" method="GET">
+        <input name="profile-name" id="profile-name" class="input popup__input" type="text" placeholder="Имя">
+        <input name="profile-job" id="profile-job" class="input popup__input" type="text" placeholder="Профессия">
+        <button class="button popup__submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup page__popup-element">
+    <div class="popup__container">
+      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" method="GET">
+        <input name="element-title" id="element-title" class="input popup__input" type="text" placeholder="Название">
+        <input name="element-link" id="element-link" class="input popup__input" type="text" placeholder="Ссылка на картинку">
+        <button class="button popup__submit" type="submit">Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup page__popup-photo">
+    <div class="popup__figure-container">
+      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <figure class="popup__figure">
+        <img class="popup__photo" src="" alt="">
+        <figcaption class="popup__figcaption"></figcaption>
+      </figure>
+    </div>
+  </section>
   <template id="element-template">
     <article class="element">
       <a href="#" class="element__photo-link">
@@ -56,17 +74,6 @@
         <div class="button button_action_empty-heart element__like"></div>
       </div>
     </article>
-  </template>
-  <template id="photo-template">
-    <section class="popup popup_opened">
-      <div class="popup__figure-container">
-        <button type="button" class="button button_action_cross popup__close-button"></button>
-        <figure class="popup__figure">
-          <img class="popup__photo" src="" alt="">
-          <figcaption class="popup__figcaption"></figcaption>
-        </figure>
-      </div>
-    </section>
   </template>
   <script src="./scripts/script.js"></script>
 </body>
