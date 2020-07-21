@@ -32,27 +32,21 @@ const closePopup = popup => {
 const editFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  const mainInput = document.querySelector('#profile-name');
-  const additionalInput = document.querySelector('#profile-job');
-
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
 
-  profileTitle.textContent = mainInput.value;
-  profileSubtitle.textContent = additionalInput.value;
+  profileTitle.textContent = profileName.value;
+  profileSubtitle.textContent = profileJob.value;
 
-  closePopup(document.querySelector('.page__popup-profile'));
+  closePopup(profilePopup);
 }
 
 const addFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  const mainInput = document.querySelector('#element-title').value;
-  const additionalInput = document.querySelector('#element-link').value;
+  addElement(elementTitle.value, elementLink.value);
 
-  addElement(mainInput, additionalInput);
-
-  closePopup(document.querySelector('.page__popup-element'));
+  closePopup(elementPopup);
 }
 
 const addElement = (title, photo) => {
@@ -85,43 +79,20 @@ const addElement = (title, photo) => {
 }
 
 const fillEditPopup = () => {
-  const popup = document.querySelector('.page__popup-profile');
+  profileName.value = document.querySelector('.profile__title').textContent;
+  profileJob.value = document.querySelector('.profile__subtitle').textContent;
 
-  const formElement = popup.querySelector('.popup__form');
-
-  formElement.addEventListener('submit', editFormSubmitHandler);
-
-  const mainInput = formElement.querySelector('#profile-name');
-  const additionalInput = formElement.querySelector('#profile-job');
-
-  const profileTitle = document.querySelector('.profile__title');
-  const profileSubtitle = document.querySelector('.profile__subtitle');
-
-  mainInput.value = profileTitle.textContent;
-  additionalInput.value = profileSubtitle.textContent;
-
-  return popup;
-}
-
-const fillAddPopup = () => {
-  const popup = document.querySelector('.page__popup-element');
-
-  const formElement = popup.querySelector('.popup__form');
-  formElement.addEventListener('submit', addFormSubmitHandler);
-
-  return popup;
+  return profilePopup;
 }
 
 const fillPhotoPopup = target => {
-  const popup = document.querySelector('.page__popup-photo');
-
   const element = target.closest('.element');
 
-  popup.querySelector('.popup__photo').src = target.src;
-  popup.querySelector('.popup__photo').alt = target.alt;
-  popup.querySelector('.popup__figcaption').textContent = element.querySelector('.element__title').textContent;
+  photoPopup.querySelector('.popup__photo').src = target.src;
+  photoPopup.querySelector('.popup__photo').alt = target.alt;
+  photoPopup.querySelector('.popup__figcaption').textContent = element.querySelector('.element__title').textContent;
 
-  return popup;
+  return photoPopup;
 }
 
 const openPopup = target => {
@@ -132,25 +103,39 @@ const openPopup = target => {
       popup = fillEditPopup();
       break;
     case target.classList.contains('profile__add-button'):
-      popup = fillAddPopup()
+      popup = elementPopup;
       break;
     case target.classList.contains('element__photo'):
       popup = fillPhotoPopup(target);
       break;
   }
 
-  const closeButton = popup.querySelector('.popup__close-button');
-  closeButton.addEventListener('click', () => closePopup(popup));
-
   popup.classList.add('popup_opened');
 }
 
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
+// Initialize buttons handlers
+const editButton = document.querySelector('.profile__edit-button').addEventListener('click', evt => openPopup(evt.target));
+const addButton = document.querySelector('.profile__add-button').addEventListener('click', evt => openPopup(evt.target));
 
-editButton.addEventListener('click', evt => openPopup(evt.target));
-addButton.addEventListener('click', evt => openPopup(evt.target));
+// Profile popup part
+const profilePopup = document.querySelector('.page__popup-profile');
+profilePopup.querySelector('.popup__form').addEventListener('submit', editFormSubmitHandler);
+profilePopup.querySelector('.popup__close-button').addEventListener('click', () => closePopup(profilePopup));
+const profileName = document.querySelector('#profile-name');
+const profileJob = document.querySelector('#profile-job');
 
+// Element popup part
+const elementPopup = document.querySelector('.page__popup-element');
+elementPopup.querySelector('.popup__form').addEventListener('submit', addFormSubmitHandler);
+elementPopup.querySelector('.popup__close-button').addEventListener('click', () => closePopup(elementPopup));
+const elementTitle = document.querySelector('#element-title');
+const elementLink = document.querySelector('#element-link');
+
+// Photo popup part
+const photoPopup = document.querySelector('.page__popup-photo');
+photoPopup.querySelector('.popup__close-button').addEventListener('click', () => closePopup(photoPopup));
+
+// Initialize existing cards
 initialCards.forEach(card => {
   addElement(card.name, card.link);
 })
