@@ -222,12 +222,16 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.remove('popup__submit_state_enable');
+    buttonElement.classList.remove('button_state_enable');
     buttonElement.classList.add('popup__submit_state_disable');
+    buttonElement.classList.add('button_state_disable');
     buttonElement.disabled = true;
   } else {
+    buttonElement.classList.remove('button_state_disable');
     buttonElement.classList.remove('popup__submit_state_disable');
-    buttonElement.disabled = false;
+    buttonElement.classList.add('button_state_enable');
     buttonElement.classList.add('popup__submit_state_enable');
+    buttonElement.disabled = false;
   }
 };
 
