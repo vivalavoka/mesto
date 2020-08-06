@@ -17,13 +17,13 @@
         <article class="profile__info">
           <div class="profile__info-top">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button type="button" class="button button_action_pencil profile__edit-button"></button>
+            <button type="button" class="button button_state_enable button_action_pencil profile__edit-button"></button>
           </div>
           <div class="profile__info-bottom">
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </article>
-        <button type="button" class="button button_action_cross profile__add-button"></button>
+        <button type="button" class="button button_state_enable button_action_cross profile__add-button"></button>
       </section>
       <section class="elements">
       </section>
@@ -34,29 +34,41 @@
   </div>
   <section class="popup page__popup-profile">
     <div class="popup__container">
-      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <button type="button" class="button button_state_enable button_action_cross popup__close-button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" method="GET">
-        <input name="profile-name" id="profile-name" class="input popup__input" type="text" placeholder="Имя">
-        <input name="profile-job" id="profile-job" class="input popup__input" type="text" placeholder="Профессия">
-        <button class="button popup__submit" type="submit">Сохранить</button>
+      <form class="popup__form" method="GET" novalidate>
+        <label class="popup__input-wrap">
+          <input name="profile-name" id="profile-name" class="input popup__input input_state_initial" type="text" placeholder="Имя" required minlength="2" maxlength="40">
+          <span id="profile-name-error" class="popup__input-error"></span>
+        </label>
+        <label class="popup__input-wrap">
+          <input name="profile-job" id="profile-job" class="input popup__input input_state_initial" type="text" placeholder="Профессия" required minlength="2" maxlength="200">
+          <span id="profile-job-error" class="popup__input-error"></span>
+        </label>
+        <button class="button button_state_enable popup__submit popup__submit_state_enable" type="submit">Сохранить</button>
       </form>
     </div>
   </section>
   <section class="popup page__popup-element">
     <div class="popup__container">
-      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <button type="button" class="button button_state_enable button_action_cross popup__close-button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form" method="GET">
-        <input name="element-title" id="element-title" class="input popup__input" type="text" placeholder="Название">
-        <input name="element-link" id="element-link" class="input popup__input" type="text" placeholder="Ссылка на картинку">
-        <button class="button popup__submit" type="submit">Создать</button>
+      <form class="popup__form" method="GET" novalidate>
+        <label class="popup__input-wrap">
+          <input name="element-title" id="element-title" class="input popup__input input_state_initial" type="text" placeholder="Название" required minlength="1" maxlength="30">
+          <span id="element-title-error" class="popup__input-error"></span>
+        </label>
+        <label class="popup__input-wrap">
+          <input name="element-link" id="element-link" class="input popup__input input_state_initial" type="url" placeholder="Ссылка на картинку" required>
+          <span id="element-link-error" class="popup__input-error"></span>
+        </label>
+        <button class="button button_state_disable popup__submit popup__submit_state_disable" type="submit" disabled>Создать</button>
       </form>
     </div>
   </section>
   <section class="popup page__popup-photo">
     <div class="popup__figure-container">
-      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <button type="button" class="button button_state_enable button_action_cross popup__close-button"></button>
       <figure class="popup__figure">
         <img class="popup__photo" src="" alt="">
         <figcaption class="popup__figcaption"></figcaption>
@@ -68,13 +80,14 @@
       <a href="#" class="element__photo-link">
         <img class="element__photo" src="" alt="">
       </a>
-      <div class="button button_action_trash element__delete"></div>
+      <div class="button button_state_enable button_action_trash element__delete"></div>
       <div class="element__panel">
         <h2 class="element__title"></h2>
-        <div class="button button_action_empty-heart element__like"></div>
+        <div class="button button_state_enable button_action_empty-heart element__like"></div>
       </div>
     </article>
   </template>
   <script src="./scripts/script.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

@@ -1,8 +1,10 @@
+@import url(./_state/input_state_invalid.css);
+@import url(./_state/input_state_valid.css);
+@import url(./_state/input_state_initial.css);
+
 .input {
-    width: 100%;
-    padding: 13px 0;
-    border: 0;
-    border-bottom: 1px solid #0003;
-    box-sizing: border-box;
-    outline: 0;
+  width: 100%;
+  padding: 13px 0;
+  box-sizing: border-box;
+  outline: 0;
 }

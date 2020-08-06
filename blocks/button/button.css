@@ -4,6 +4,9 @@
 @import url(./_action/button_action_fill-heart.css);
 @import url(./_action/button_action_trash.css);
 
+@import url(./_state/button_state_enable.css);
+@import url(./_state/button_state_disable.css);
+
 .button {
   margin: 0;
   padding: 0;
@@ -11,11 +14,5 @@
   text-decoration: none;
   background-color: transparent;
   color: white;
-  cursor: pointer;
-  transition: opacity .1s;
   outline: 0;
-}
-
-.button:hover {
-  opacity: 0.6;
 }
