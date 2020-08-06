@@ -168,4 +168,34 @@ photoPopup.addEventListener('click', (evt) => {
 // Initialize existing cards
 initialCards.forEach(card => {
   renderElement(createCard(card.name, card.link));
-})
+});
+
+Array.from(document.forms).forEach(form => {
+  Array.from(form.elements).forEach(element => {
+    element.addEventListener('input', evt => {
+      isValid(form, evt.target);
+    })
+  });
+});
+
+const showInputError = (form, element, errorMessage) => {
+  element.classList.remove('input_state_initial');
+  element.classList.add('input_state_invalid');
+  const errorElement = form.querySelector(`#${element.id}-error`);
+  errorElement.textContent = errorMessage;
+}
+
+const hideInputError = (form, element) => {
+  element.classList.remove('input_state_invalid');
+  element.classList.add('input_state_initial');
+  const errorElement = form.querySelector(`#${element.id}-error`);
+  errorElement.textContent = '';
+}
+
+const isValid = (form, element) => {
+  if (element.validity.valid) {
+    hideInputError(form, element);
+  } else {
+    showInputError(form, element, element.validationMessage);
+  }
+}
