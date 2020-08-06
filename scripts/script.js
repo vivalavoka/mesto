@@ -170,13 +170,27 @@ initialCards.forEach(card => {
   renderElement(createCard(card.name, card.link));
 });
 
-Array.from(document.forms).forEach(form => {
-  Array.from(form.elements).forEach(element => {
+
+const setEventListeners = form => {
+  const inputList = Array.from(form.elements);
+  const buttonElement = form.querySelector('.popup__submit');
+
+  inputList.forEach(element => {
     element.addEventListener('input', evt => {
       isValid(form, evt.target);
+      toggleButtonState(inputList, buttonElement);
     })
   });
-});
+}
+
+const enableValidation = () => {
+  Array.from(document.forms).forEach(formElement => {
+    formElement.addEventListener('submit', evt => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  })
+}
 
 const showInputError = (form, element, errorMessage) => {
   element.classList.remove('input_state_initial');
@@ -199,3 +213,22 @@ const isValid = (form, element) => {
     showInputError(form, element, element.validationMessage);
   }
 }
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => !inputElement.validity.valid);
+};
+
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.remove('popup__submit_state_enable');
+    buttonElement.classList.add('popup__submit_state_disable');
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.classList.remove('popup__submit_state_disable');
+    buttonElement.disabled = false;
+    buttonElement.classList.add('popup__submit_state_enable');
+  }
+};
+
+enableValidation();
