@@ -114,54 +114,42 @@ const createCard = (title, photo) => {
     evt.target.closest('.element').remove();
   });
 
-  element.querySelector('.element__photo-link').addEventListener('click', evt => openPopup(evt.target));
+  element.querySelector('.element__photo-link').addEventListener('click', evt => {
+    const element = evt.target.closest('.element');
+
+    const popupPhoto = photoPopup.querySelector('.popup__photo');
+    const popupTitle = photoPopup.querySelector('.popup__figcaption');
+    const elementTitle = element.querySelector('.element__title');
+
+    popupPhoto.src = evt.target.src;
+    popupPhoto.alt = evt.target.alt;
+    popupTitle.textContent = elementTitle.textContent;
+
+    openPopup(photoPopup);
+  });
 
   return element;
 }
 
-const fillEditPopup = () => {
-  profileName.value = profileTitle.textContent;
-  profileJob.value = profileSubtitle.textContent;
-
-  return profilePopup;
-}
-
-const fillPhotoPopup = target => {
-  const element = target.closest('.element');
-
-  const popupPhoto = photoPopup.querySelector('.popup__photo');
-  const popupTitle = photoPopup.querySelector('.popup__figcaption');
-  const elementTitle = element.querySelector('.element__title');
-
-  popupPhoto.src = target.src;
-  popupPhoto.alt = target.alt;
-  popupTitle.textContent = elementTitle.textContent;
-
-  return photoPopup;
-}
-
-const openPopup = target => {
-  let popup;
-
-  switch (true) {
-    case target.classList.contains('profile__edit-button'):
-      popup = fillEditPopup();
-      break;
-    case target.classList.contains('profile__add-button'):
-      popup = elementPopup;
-      break;
-    case target.classList.contains('element__photo'):
-      popup = fillPhotoPopup(target);
-      break;
-  }
-
+const openPopup = popup => {
   setPopupEventListeners(popup);
   popup.classList.add('popup_opened');
 }
 
 // Initialize buttons handlers
-const editButton = document.querySelector('.profile__edit-button').addEventListener('click', evt => openPopup(evt.target));
-const addButton = document.querySelector('.profile__add-button').addEventListener('click', evt => openPopup(evt.target));
+const setOpenPopupEventListeners = () => {
+  editButton.addEventListener('click', evt => {
+    profileName.value = profileTitle.textContent;
+    profileJob.value = profileSubtitle.textContent;
+    openPopup(profilePopup);
+  });
+  addButton.addEventListener('click', evt => {
+    openPopup(elementPopup);
+  });
+}
+
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
 
 // Initialize element template
 const elementList = document.querySelector('.elements');
@@ -185,6 +173,9 @@ const elementLink = document.querySelector('#element-link');
 
 // Photo popup part
 const photoPopup = document.querySelector('.page__popup-photo');
+
+
+setOpenPopupEventListeners();
 
 // Initialize existing cards
 initialCards.forEach(card => {
