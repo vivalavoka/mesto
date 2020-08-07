@@ -1,3 +1,29 @@
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+
+// Initialize element template
+const elementList = document.querySelector('.elements');
+const elementTemplate = document.querySelector('#element-template').content;
+
+// Initialize profile output
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
+
+// Profile popup part
+const profilePopup = document.querySelector('.page__popup-profile');
+
+const profileName = document.querySelector('#profile-name');
+const profileJob = document.querySelector('#profile-job');
+
+// Element popup part
+const elementPopup = document.querySelector('.page__popup-element');
+
+const elementTitle = document.querySelector('#element-title');
+const elementLink = document.querySelector('#element-link');
+
+// Photo popup part
+const photoPopup = document.querySelector('.page__popup-photo');
+
 const initialCards = [
   {
       name: 'Москва, Россия',
@@ -24,70 +50,6 @@ const initialCards = [
       link: 'https://images.unsplash.com/photo-1594744754648-7836af69e1c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80'
   }
 ];
-
-const closePopup = popup => {
-  removePopupEventListeners(popup);
-  popup.classList.remove('popup_opened');
-}
-
-const keyDownListener = function (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-const overlayClickListener = function (evt) {
-  if (evt.currentTarget === evt.target) {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-const closeButtonListener = function (evt) {
-  closePopup(document.querySelector('.popup_opened'));
-}
-
-const setPopupEventListeners = (popupElement) => {
-  const closeButton = popupElement.querySelector('.popup__close-button');
-  const popupForm = popupElement.querySelector('.popup__form');
-
-  document.addEventListener('keydown', keyDownListener);
-  popupElement.addEventListener('click', overlayClickListener);
-  closeButton.addEventListener('click', closeButtonListener);
-
-  if (popupForm) {
-    popupForm.addEventListener('submit', formSubmitHandler);
-  }
-}
-
-const removePopupEventListeners = (popupElement) => {
-  const closeButton = popupElement.querySelector('.popup__close-button');
-  const popupForm = popupElement.querySelector('.popup__form');
-
-  document.removeEventListener('keydown', keyDownListener);
-  popupElement.removeEventListener('click', overlayClickListener);
-  closeButton.removeEventListener('click', closeButtonListener);
-
-  if (popupForm) {
-    popupForm.removeEventListener('submit', formSubmitHandler);
-  }
-}
-
-const formSubmitHandler = evt => {
-  evt.preventDefault();
-
-  if (evt.target.name === 'profile-form') {
-    profileTitle.textContent = profileName.value;
-    profileSubtitle.textContent = profileJob.value;
-  } else if (evt.target.name === 'element-form') {
-    renderElement(createCard(elementTitle.value, elementLink.value));
-  }
-
-  closePopup(document.querySelector('.popup_opened'));
-}
-
-const renderElement = element => {
-  elementList.prepend(element);
-}
 
 const createCard = (title, photo) => {
   const element = elementTemplate.cloneNode(true);
@@ -131,9 +93,73 @@ const createCard = (title, photo) => {
   return element;
 }
 
+const renderElement = element => {
+  elementList.prepend(element);
+}
+
+const keyDownListener = function (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+}
+
+const overlayClickListener = function (evt) {
+  if (evt.currentTarget === evt.target) {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+}
+
+const closeButtonListener = function (evt) {
+  closePopup(document.querySelector('.popup_opened'));
+}
+
+const formSubmitHandler = evt => {
+  evt.preventDefault();
+
+  if (evt.target.name === 'profile-form') {
+    profileTitle.textContent = profileName.value;
+    profileSubtitle.textContent = profileJob.value;
+  } else if (evt.target.name === 'element-form') {
+    renderElement(createCard(elementTitle.value, elementLink.value));
+  }
+
+  closePopup(document.querySelector('.popup_opened'));
+}
+
+const setPopupEventListeners = (popupElement) => {
+  const closeButton = popupElement.querySelector('.popup__close-button');
+  const popupForm = popupElement.querySelector('.popup__form');
+
+  document.addEventListener('keydown', keyDownListener);
+  popupElement.addEventListener('click', overlayClickListener);
+  closeButton.addEventListener('click', closeButtonListener);
+
+  if (popupForm) {
+    popupForm.addEventListener('submit', formSubmitHandler);
+  }
+}
+
 const openPopup = popup => {
   setPopupEventListeners(popup);
   popup.classList.add('popup_opened');
+}
+
+const removePopupEventListeners = (popupElement) => {
+  const closeButton = popupElement.querySelector('.popup__close-button');
+  const popupForm = popupElement.querySelector('.popup__form');
+
+  document.removeEventListener('keydown', keyDownListener);
+  popupElement.removeEventListener('click', overlayClickListener);
+  closeButton.removeEventListener('click', closeButtonListener);
+
+  if (popupForm) {
+    popupForm.removeEventListener('submit', formSubmitHandler);
+  }
+}
+
+const closePopup = popup => {
+  removePopupEventListeners(popup);
+  popup.classList.remove('popup_opened');
 }
 
 // Initialize buttons handlers
@@ -147,33 +173,6 @@ const setOpenPopupEventListeners = () => {
     openPopup(elementPopup);
   });
 }
-
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-
-// Initialize element template
-const elementList = document.querySelector('.elements');
-const elementTemplate = document.querySelector('#element-template').content;
-
-// Initialize profile output
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-
-// Profile popup part
-const profilePopup = document.querySelector('.page__popup-profile');
-
-const profileName = document.querySelector('#profile-name');
-const profileJob = document.querySelector('#profile-job');
-
-// Element popup part
-const elementPopup = document.querySelector('.page__popup-element');
-
-const elementTitle = document.querySelector('#element-title');
-const elementLink = document.querySelector('#element-link');
-
-// Photo popup part
-const photoPopup = document.querySelector('.page__popup-photo');
-
 
 setOpenPopupEventListeners();
 
