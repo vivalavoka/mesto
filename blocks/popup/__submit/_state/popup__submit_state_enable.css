@@ -2,6 +2,8 @@
   background-color: #000;
   color: #FFF;
   border: 0;
+  cursor: pointer;
+  transition: opacity .1s;
 }
 
 .popup__submit_state_enable:hover {

@@ -27,20 +27,12 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement, options) => {
   if (hasInvalidInput(inputList)) {
-    options.enableButtonClasses.forEach(className => {
-      buttonElement.classList.remove(className);
-    });
-    options.disableButtonClasses.forEach(className => {
-      buttonElement.classList.add(className);
-    });
+    buttonElement.classList.remove(options.enableButtonClass);
+    buttonElement.classList.add(options.disableButtonClass);
     buttonElement.disabled = true;
   } else {
-    options.disableButtonClasses.forEach(className => {
-      buttonElement.classList.remove(className);
-    });
-    options.enableButtonClasses.forEach(className => {
-      buttonElement.classList.add(className);
-    });
+    buttonElement.classList.remove(options.disableButtonClass);
+    buttonElement.classList.add(options.enableButtonClass);
     buttonElement.disabled = false;
   }
 };
@@ -70,6 +62,6 @@ enableValidation({
   submitButtonSelector: '.popup__submit',
   initialInputClass: '.input_state_initial',
   invalidInputClass: '.input_state_invalid',
-  disableButtonClasses: ['button_state_disable', 'popup__submit_state_disable'],
-  enableButtonClasses: ['button_state_enable', 'popup__submit_state_enable'],
+  disableButtonClass: 'popup__submit_state_disable',
+  enableButtonClass: 'popup__submit_state_enable',
 });
