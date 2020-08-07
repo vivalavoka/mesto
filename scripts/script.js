@@ -62,14 +62,7 @@ const createCard = (title, photo) => {
   elementPhoto.src = photo;
 
   element.querySelector('.element__like').addEventListener('click', evt => {
-    const classList = evt.target.classList;
-    if (classList.contains('button_action_empty-heart')) {
-      classList.remove('button_action_empty-heart');
-      classList.add('button_action_fill-heart');
-    } else {
-      classList.remove('button_action_fill-heart');
-      classList.add('button_action_empty-heart');
-    }
+    evt.target.classList.toggle('button_action_fill-heart');
   });
 
   element.querySelector('.element__delete').addEventListener('click', evt => {
