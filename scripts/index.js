@@ -1,9 +1,10 @@
+import Card from './Card.js';
+
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
 // Initialize element template
 const elementList = document.querySelector('.elements');
-const elementTemplate = document.querySelector('#element-template').content;
 
 // Initialize profile output
 const profileTitle = document.querySelector('.profile__title');
@@ -51,43 +52,8 @@ const initialCards = [
   }
 ];
 
-const createCard = (title, photo) => {
-  const element = elementTemplate.cloneNode(true);
-
-  const elementTitle = element.querySelector('.element__title');
-  const elementPhoto = element.querySelector('.element__photo');
-
-  elementTitle.textContent = title;
-  elementPhoto.alt = title;
-  elementPhoto.src = photo;
-
-  element.querySelector('.element__like').addEventListener('click', evt => {
-    evt.target.classList.toggle('button_action_fill-heart');
-  });
-
-  element.querySelector('.element__delete').addEventListener('click', evt => {
-    evt.target.closest('.element').remove();
-  });
-
-  element.querySelector('.element__photo-link').addEventListener('click', evt => {
-    const element = evt.target.closest('.element');
-
-    const popupPhoto = photoPopup.querySelector('.popup__photo');
-    const popupTitle = photoPopup.querySelector('.popup__figcaption');
-    const elementTitle = element.querySelector('.element__title');
-
-    popupPhoto.src = evt.target.src;
-    popupPhoto.alt = evt.target.alt;
-    popupTitle.textContent = elementTitle.textContent;
-
-    openPopup(photoPopup);
-  });
-
-  return element;
-}
-
 const renderElement = element => {
-  elementList.prepend(element);
+  elementList.prepend(element.generateCard());
 }
 
 const keyDownListener = function (evt) {
@@ -171,5 +137,5 @@ setOpenPopupEventListeners();
 
 // Initialize existing cards
 initialCards.forEach(card => {
-  renderElement(createCard(card.name, card.link));
+  renderElement(new Card(card, '#element-template'));
 });
