@@ -70,60 +70,46 @@ const closeButtonListener = function (evt) {
   closePopup(document.querySelector('.popup_opened'));
 }
 
-const formSubmitHandler = evt => {
+const profileFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  if (evt.target.name === 'profile-form') {
-    profileTitle.textContent = profileName.value;
-    profileSubtitle.textContent = profileJob.value;
-  } else if (evt.target.name === 'element-form') {
-    renderElement(new Card({
-      name: elementTitle.value,
-      link: elementLink.value,
-    }, 'element-template'));
-  }
+  profileTitle.textContent = profileName.value;
+  profileSubtitle.textContent = profileJob.value;
 
   closePopup(document.querySelector('.popup_opened'));
 }
 
-const setPopupEventListeners = (popupElement) => {
-  const closeButton = popupElement.querySelector('.popup__close-button');
-  const popupForm = popupElement.querySelector('.popup__form');
+const elementFormSubmitHandler = evt => {
+  evt.preventDefault();
 
+  renderElement(new Card({
+    name: elementTitle.value,
+    link: elementLink.value,
+  }, 'element-template'));
+
+  closePopup(document.querySelector('.popup_opened'));
+}
+
+const setKeydownEventListeners = () => {
   document.addEventListener('keydown', keyDownListener);
-  popupElement.addEventListener('click', overlayClickListener);
-  closeButton.addEventListener('click', closeButtonListener);
-
-  if (popupForm) {
-    popupForm.addEventListener('submit', formSubmitHandler);
-  }
 }
 
 const openPopup = popup => {
-  setPopupEventListeners(popup);
+  setKeydownEventListeners();
   popup.classList.add('popup_opened');
 }
 
-const removePopupEventListeners = (popupElement) => {
-  const closeButton = popupElement.querySelector('.popup__close-button');
-  const popupForm = popupElement.querySelector('.popup__form');
-
+const removeKeydownEventListeners = () => {
   document.removeEventListener('keydown', keyDownListener);
-  popupElement.removeEventListener('click', overlayClickListener);
-  closeButton.removeEventListener('click', closeButtonListener);
-
-  if (popupForm) {
-    popupForm.removeEventListener('submit', formSubmitHandler);
-  }
 }
 
 const closePopup = popup => {
-  removePopupEventListeners(popup);
+  removeKeydownEventListeners();
   popup.classList.remove('popup_opened');
 }
 
-// Initialize buttons handlers
-const setOpenPopupEventListeners = () => {
+// set Common page button handlers
+const setupButtonHandlers = () => {
   editButton.addEventListener('click', evt => {
     profileName.value = profileTitle.textContent;
     profileJob.value = profileSubtitle.textContent;
@@ -134,7 +120,26 @@ const setOpenPopupEventListeners = () => {
   });
 }
 
-setOpenPopupEventListeners();
+// set Common popup click handlers
+const setupPopupHandlers = popupElement => {
+  const closeButton = popupElement.querySelector('.popup__close-button');
+
+  popupElement.addEventListener('click', overlayClickListener);
+  closeButton.addEventListener('click', closeButtonListener);
+}
+
+// Initialize common handlers
+const setupCommonHandlers = () => {
+  setupButtonHandlers();
+
+  profilePopup.querySelector('.popup__form').addEventListener('submit', profileFormSubmitHandler);
+  setupPopupHandlers(profilePopup);
+
+  elementPopup.querySelector('.popup__form').addEventListener('submit', elementFormSubmitHandler);
+  setupPopupHandlers(elementPopup);
+}
+
+setupCommonHandlers();
 
 (new FormValidator({
   submitButtonSelector: '.popup__submit',
