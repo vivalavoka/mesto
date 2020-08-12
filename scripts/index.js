@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -79,7 +80,10 @@ const formSubmitHandler = evt => {
     profileTitle.textContent = profileName.value;
     profileSubtitle.textContent = profileJob.value;
   } else if (evt.target.name === 'element-form') {
-    renderElement(createCard(elementTitle.value, elementLink.value));
+    renderElement(new Card({
+      name: elementTitle.value,
+      link: elementLink.value,
+    }, 'element-template'));
   }
 
   closePopup(document.querySelector('.popup_opened'));
@@ -135,7 +139,23 @@ const setOpenPopupEventListeners = () => {
 
 setOpenPopupEventListeners();
 
+new FormValidator({
+  submitButtonSelector: '.popup__submit',
+  initialInputClass: '.input_state_initial',
+  invalidInputClass: '.input_state_invalid',
+  disableButtonClass: 'popup__submit_state_disable',
+  enableButtonClass: 'popup__submit_state_enable',
+}, document.forms.namedItem('profile-form'));
+
+new FormValidator({
+  submitButtonSelector: '.popup__submit',
+  initialInputClass: '.input_state_initial',
+  invalidInputClass: '.input_state_invalid',
+  disableButtonClass: 'popup__submit_state_disable',
+  enableButtonClass: 'popup__submit_state_enable',
+}, document.forms.namedItem('element-form'));
+
 // Initialize existing cards
 initialCards.forEach(card => {
-  renderElement(new Card(card, '#element-template'));
+  renderElement(new Card(card, 'element-template'));
 });
