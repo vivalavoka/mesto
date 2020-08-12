@@ -1,3 +1,6 @@
+// Photo popup part
+const photoPopup = document.querySelector('.page__popup-photo');
+
 export default class Card {
   constructor(data, templateSelector) {
     this._name = data.name;
@@ -18,7 +21,7 @@ export default class Card {
 
     this._element.querySelector('.element__delete').addEventListener('click', this._handleDeleteClick);
 
-    this._element.querySelector('.element__photo-link').addEventListener('click', this._handleFullscreenClick);
+    this._element.querySelector('.element__photo-link').addEventListener('click', (evt) => this._handleFullscreenClick(evt));
   }
 
   _handleLikeClick(evt) {
@@ -37,7 +40,49 @@ export default class Card {
     popupPhoto.alt = evt.target.alt;
     popupTitle.textContent = elementTitle.textContent;
 
-    openPopup(photoPopup);
+    this._openPopup();
+  }
+
+  _keyDownListener(evt) {
+    if (evt.key === 'Escape') {
+      this._closePopup();
+    }
+  }
+
+  _overlayClickListener(evt) {
+    if (evt.currentTarget === evt.target) {
+      this._closePopup();
+    }
+  }
+
+  _closeButtonListener(evt) {
+    this._closePopup();
+  }
+
+  _setPopupEventListeners() {
+    const closeButton = photoPopup.querySelector('.popup__close-button');
+
+    document.addEventListener('keydown', (evt) => this._keyDownListener(evt));
+    photoPopup.addEventListener('click', (evt) => this._overlayClickListener(evt));
+    closeButton.addEventListener('click', (evt) => this._closeButtonListener(evt));
+  }
+
+  _removePopupEventListeners() {
+    const closeButton = photoPopup.querySelector('.popup__close-button');
+
+    document.removeEventListener('keydown', (evt) => this._keyDownListener(evt));
+    photoPopup.removeEventListener('click', (evt) => this._overlayClickListener(evt));
+    closeButton.removeEventListener('click', (evt) => this._closeButtonListener(evt));
+  }
+
+  _openPopup() {
+    this._setPopupEventListeners();
+    photoPopup.classList.add('popup_opened');
+  }
+
+  _closePopup () {
+    this._removePopupEventListeners();
+    photoPopup.classList.remove('popup_opened');
   }
 
   generateCard() {

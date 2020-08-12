@@ -23,9 +23,6 @@ const elementPopup = document.querySelector('.page__popup-element');
 const elementTitle = document.querySelector('#element-title');
 const elementLink = document.querySelector('#element-link');
 
-// Photo popup part
-const photoPopup = document.querySelector('.page__popup-photo');
-
 const initialCards = [
   {
       name: 'Москва, Россия',
@@ -139,21 +136,21 @@ const setOpenPopupEventListeners = () => {
 
 setOpenPopupEventListeners();
 
-new FormValidator({
+(new FormValidator({
   submitButtonSelector: '.popup__submit',
   initialInputClass: '.input_state_initial',
   invalidInputClass: '.input_state_invalid',
   disableButtonClass: 'popup__submit_state_disable',
   enableButtonClass: 'popup__submit_state_enable',
-}, document.forms.namedItem('profile-form'));
+}, document.forms.namedItem('profile-form'))).enableValidation();
 
-new FormValidator({
+(new FormValidator({
   submitButtonSelector: '.popup__submit',
   initialInputClass: '.input_state_initial',
   invalidInputClass: '.input_state_invalid',
   disableButtonClass: 'popup__submit_state_disable',
   enableButtonClass: 'popup__submit_state_enable',
-}, document.forms.namedItem('element-form'));
+}, document.forms.namedItem('element-form'))).enableValidation();
 
 // Initialize existing cards
 initialCards.forEach(card => {
