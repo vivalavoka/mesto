@@ -1,3 +1,5 @@
+import {openPopup, closePopup} from './utils.js';
+
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
@@ -54,22 +56,6 @@ const renderElement = element => {
   elementList.prepend(element.generateCard());
 }
 
-const keyDownListener = function (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-const overlayClickListener = function (evt) {
-  if (evt.currentTarget === evt.target) {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-const closeButtonListener = function (evt) {
-  closePopup(document.querySelector('.popup_opened'));
-}
-
 const profileFormSubmitHandler = evt => {
   evt.preventDefault();
 
@@ -90,24 +76,6 @@ const elementFormSubmitHandler = evt => {
   closePopup(document.querySelector('.popup_opened'));
 }
 
-const setKeydownEventListeners = () => {
-  document.addEventListener('keydown', keyDownListener);
-}
-
-const openPopup = popup => {
-  setKeydownEventListeners();
-  popup.classList.add('popup_opened');
-}
-
-const removeKeydownEventListeners = () => {
-  document.removeEventListener('keydown', keyDownListener);
-}
-
-const closePopup = popup => {
-  removeKeydownEventListeners();
-  popup.classList.remove('popup_opened');
-}
-
 // set Common page button handlers
 const setupButtonHandlers = () => {
   editButton.addEventListener('click', evt => {
@@ -120,23 +88,12 @@ const setupButtonHandlers = () => {
   });
 }
 
-// set Common popup click handlers
-const setupPopupHandlers = popupElement => {
-  const closeButton = popupElement.querySelector('.popup__close-button');
-
-  popupElement.addEventListener('click', overlayClickListener);
-  closeButton.addEventListener('click', closeButtonListener);
-}
-
 // Initialize common handlers
 const setupCommonHandlers = () => {
   setupButtonHandlers();
 
   profilePopup.querySelector('.popup__form').addEventListener('submit', profileFormSubmitHandler);
-  setupPopupHandlers(profilePopup);
-
   elementPopup.querySelector('.popup__form').addEventListener('submit', elementFormSubmitHandler);
-  setupPopupHandlers(elementPopup);
 }
 
 setupCommonHandlers();

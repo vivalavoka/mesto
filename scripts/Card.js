@@ -1,3 +1,5 @@
+import {openPopup} from './utils.js';
+
 // Photo popup part
 const photoPopup = document.querySelector('.page__popup-photo');
 
@@ -40,50 +42,9 @@ export default class Card {
     popupPhoto.alt = evt.target.alt;
     popupTitle.textContent = elementTitle.textContent;
 
-    this._openPopup();
+    openPopup(photoPopup);
   }
 
-  _keyDownListener(evt) {
-    if (evt.key === 'Escape') {
-      this._closePopup();
-    }
-  }
-
-  _overlayClickListener(evt) {
-    if (evt.currentTarget === evt.target) {
-      this._closePopup();
-    }
-  }
-
-  _closeButtonListener(evt) {
-    this._closePopup();
-  }
-
-  _setPopupEventListeners() {
-    const closeButton = photoPopup.querySelector('.popup__close-button');
-
-    document.addEventListener('keydown', (evt) => this._keyDownListener(evt));
-    photoPopup.addEventListener('click', (evt) => this._overlayClickListener(evt));
-    closeButton.addEventListener('click', (evt) => this._closeButtonListener(evt));
-  }
-
-  _removePopupEventListeners() {
-    const closeButton = photoPopup.querySelector('.popup__close-button');
-
-    document.removeEventListener('keydown', (evt) => this._keyDownListener(evt));
-    photoPopup.removeEventListener('click', (evt) => this._overlayClickListener(evt));
-    closeButton.removeEventListener('click', (evt) => this._closeButtonListener(evt));
-  }
-
-  _openPopup() {
-    this._setPopupEventListeners();
-    photoPopup.classList.add('popup_opened');
-  }
-
-  _closePopup () {
-    this._removePopupEventListeners();
-    photoPopup.classList.remove('popup_opened');
-  }
 
   generateCard() {
     this._element = this._getTemplate();
