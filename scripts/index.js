@@ -15,15 +15,26 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 
 // Profile popup part
 const profilePopup = document.querySelector('.page__popup-profile');
+const profileForm = document.forms.namedItem('profile-form');
 
 const profileName = document.querySelector('#profile-name');
 const profileJob = document.querySelector('#profile-job');
 
 // Element popup part
 const elementPopup = document.querySelector('.page__popup-element');
+const elementForm = document.forms.namedItem('element-form');
 
 const elementTitle = document.querySelector('#element-title');
 const elementLink = document.querySelector('#element-link');
+
+// Forms options
+const formValidatorOptions = {
+  submitButtonSelector: '.popup__submit',
+  initialInputClass: '.input_state_initial',
+  invalidInputClass: '.input_state_invalid',
+  disableButtonClass: 'popup__submit_state_disable',
+  enableButtonClass: 'popup__submit_state_enable',
+};
 
 const initialCards = [
   {
@@ -98,21 +109,9 @@ const setupCommonHandlers = () => {
 
 setupCommonHandlers();
 
-(new FormValidator({
-  submitButtonSelector: '.popup__submit',
-  initialInputClass: '.input_state_initial',
-  invalidInputClass: '.input_state_invalid',
-  disableButtonClass: 'popup__submit_state_disable',
-  enableButtonClass: 'popup__submit_state_enable',
-}, document.forms.namedItem('profile-form'))).enableValidation();
+(new FormValidator(formValidatorOptions, profileForm)).enableValidation();
 
-(new FormValidator({
-  submitButtonSelector: '.popup__submit',
-  initialInputClass: '.input_state_initial',
-  invalidInputClass: '.input_state_invalid',
-  disableButtonClass: 'popup__submit_state_disable',
-  enableButtonClass: 'popup__submit_state_enable',
-}, document.forms.namedItem('element-form'))).enableValidation();
+(new FormValidator(formValidatorOptions, elementForm)).enableValidation();
 
 // Initialize existing cards
 initialCards.forEach(card => {

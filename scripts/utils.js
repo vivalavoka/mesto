@@ -17,7 +17,7 @@ const _closeButtonListener = (evt, popup) => {
 const _setPopupEventListeners = (popup) => {
   const closeButton = popup.querySelector('.popup__close-button');
 
-  document.addEventListener('keydown', (evt) => _keyDownListener(evt, popup));
+  document.addEventListener('keyup', (evt) => _keyDownListener(evt, popup));
   popup.addEventListener('click', (evt) => _overlayClickListener(evt, popup));
   closeButton.addEventListener('click', (evt) => _closeButtonListener(evt, popup));
 }
