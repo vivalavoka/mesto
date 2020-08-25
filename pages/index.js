@@ -17,12 +17,17 @@ import {
   formValidatorOptions,
 } from '../utils/contants.js';
 
+import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
-const renderElement = element => {
-  elementList.prepend(element.generateCard());
-}
+const cardListSection = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, 'element-template');
+    return card.generateCard();
+  },
+}, elementList);
 
 const profileFormSubmitHandler = evt => {
   evt.preventDefault();
@@ -36,7 +41,7 @@ const profileFormSubmitHandler = evt => {
 const elementFormSubmitHandler = evt => {
   evt.preventDefault();
 
-  renderElement(new Card({
+  cardListSection.setItem(new Card({
     name: elementTitle.value,
     link: elementLink.value,
   }, 'element-template'));
@@ -70,7 +75,4 @@ setupCommonHandlers();
 
 (new FormValidator(formValidatorOptions, elementForm)).enableValidation();
 
-// Initialize existing cards
-initialCards.forEach(card => {
-  renderElement(new Card(card, 'element-template'));
-});
+cardListSection.renderItems();
