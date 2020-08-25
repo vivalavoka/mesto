@@ -5,7 +5,7 @@ const _keyDownListener = (evt, popup) => {
 }
 
 const _closePopupListener = (evt, popup) => {
-  if (evt.target.classList.contains('popup__close-button') 
+  if (evt.target.classList.contains('popup__close-button')
     || evt.target.classList.contains('popup')) {
     closePopup(popup);
   }

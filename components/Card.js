@@ -1,7 +1,5 @@
-import {openPopup} from './utils.js';
-
-// Photo popup part
-const photoPopup = document.querySelector('.page__popup-photo');
+import {openPopup} from '../utils/utils.js';
+import {photoPopup} from '../utils/contants.js';
 
 export default class Card {
   constructor(data, templateSelector) {
