@@ -1,0 +1,26 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "[Github Pages](https://vivalavoka.github.io/mesto/)",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "build": "rm -rf dist && webpack",
+    "dev": "webpack-dev-server --open --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivalavoka/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vivalavoka/mesto/issues"
+  },
+  "homepage": "https://github.com/vivalavoka/mesto#readme"
+}
