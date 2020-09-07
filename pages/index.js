@@ -16,7 +16,8 @@ import {
 } from '../utils/constants.js';
 
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
@@ -28,28 +29,26 @@ const cardListSection = new Section({
   },
 }, '.elements');
 
-const profilePopup = new Popup('.page__popup-profile');
-const elementPopup = new Popup('.page__popup-element');
+// const photoPopup = new PopupWithImage('.page__popup-photo');
 
-const profileFormSubmitHandler = evt => {
+const profilePopup = new PopupWithForm('.page__popup-profile', (evt) => {
   evt.preventDefault();
 
   profileTitle.textContent = profileName.value;
   profileSubtitle.textContent = profileJob.value;
 
   profilePopup.close();
-}
-
-const elementFormSubmitHandler = evt => {
+});
+const elementPopup = new PopupWithForm('.page__popup-element', (evt) => {
   evt.preventDefault();
 
-  cardListSection.setItem(new Card({
+  cardListSection.addItem(new Card({
     name: elementTitle.value,
     link: elementLink.value,
   }, 'element-template'));
 
   elementPopup.close();
-}
+});
 
 // set Common page button handlers
 const setupButtonHandlers = () => {
@@ -64,14 +63,7 @@ const setupButtonHandlers = () => {
 }
 
 // Initialize common handlers
-const setupCommonHandlers = () => {
-  setupButtonHandlers();
-
-  profilePopup._popup.querySelector('.popup__form').addEventListener('submit', profileFormSubmitHandler);
-  elementPopup._popup.querySelector('.popup__form').addEventListener('submit', elementFormSubmitHandler);
-}
-
-setupCommonHandlers();
+setupButtonHandlers();
 
 (new FormValidator(formValidatorOptions, profileForm)).enableValidation();
 

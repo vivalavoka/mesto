@@ -1,5 +1,6 @@
-import {openPopup} from '../utils/utils.js';
-import {photoPopup} from '../utils/contants.js';
+import PopupWithImage from './PopupWithImage.js';
+
+const photoPopup = new PopupWithImage('.page__popup-photo');
 
 export default class Card {
   constructor(data, templateSelector) {
@@ -33,16 +34,8 @@ export default class Card {
   }
 
   _handleFullscreenClick(evt) {
-    const popupPhoto = photoPopup.querySelector('.popup__photo');
-    const popupTitle = photoPopup.querySelector('.popup__figcaption');
-    const elementTitle = evt.target.closest('.element').querySelector('.element__title');
-    popupPhoto.src = evt.target.src;
-    popupPhoto.alt = evt.target.alt;
-    popupTitle.textContent = elementTitle.textContent;
-
-    openPopup(photoPopup);
+    photoPopup.open(evt);
   }
-
 
   generateCard() {
     this._element = this._getTemplate();
