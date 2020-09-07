@@ -1,11 +1,9 @@
-import PopupWithImage from './PopupWithImage.js';
-
-const photoPopup = new PopupWithImage('.page__popup-photo');
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+
+    this._handleCardClick = handleCardClick;
 
     this._templateSelector = `#${templateSelector}`;
     this._element = null;
@@ -22,7 +20,7 @@ export default class Card {
 
     this._element.querySelector('.element__delete').addEventListener('click', this._handleDeleteClick);
 
-    this._element.querySelector('.element__photo-link').addEventListener('click', (evt) => this._handleFullscreenClick(evt));
+    this._element.querySelector('.element__photo-link').addEventListener('click', this._handleCardClick);
   }
 
   _handleLikeClick(evt) {
@@ -31,10 +29,6 @@ export default class Card {
 
   _handleDeleteClick(evt) {
     evt.target.closest('.element').remove();
-  }
-
-  _handleFullscreenClick(evt) {
-    photoPopup.open(evt);
   }
 
   generateCard() {

@@ -8,9 +8,6 @@ export const profileSubtitle = document.querySelector('.profile__subtitle');
 // Profile popup part
 export const profileForm = document.forms.namedItem('profile-form');
 
-export const profileName = document.querySelector('#profile-name');
-export const profileJob = document.querySelector('#profile-job');
-
 // Element popup part
 export const elementForm = document.forms.namedItem('element-form');
 

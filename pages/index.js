@@ -7,8 +7,6 @@ import {
   profileTitle,
   profileSubtitle,
   profileForm,
-  profileName,
-  profileJob,
   elementForm,
   elementTitle,
   elementLink,
@@ -16,6 +14,7 @@ import {
 } from '../utils/constants.js';
 
 import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
@@ -24,28 +23,38 @@ import FormValidator from '../components/FormValidator.js';
 const cardListSection = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, 'element-template');
+    const card = new Card(item, 'element-template', (evt) => {
+      photoPopup.open(evt);
+    });
     return card.generateCard();
   },
 }, '.elements');
 
-// const photoPopup = new PopupWithImage('.page__popup-photo');
+const userInfo = new UserInfo('#profile-name', '#profile-job');
+const photoPopup = new PopupWithImage('.page__popup-photo');
 
 const profilePopup = new PopupWithForm('.page__popup-profile', (evt) => {
   evt.preventDefault();
 
-  profileTitle.textContent = profileName.value;
-  profileSubtitle.textContent = profileJob.value;
+  const {name, job} = userInfo.getUserInfo();
+
+  profileTitle.textContent = name;
+  profileSubtitle.textContent = job;
 
   profilePopup.close();
 });
+
 const elementPopup = new PopupWithForm('.page__popup-element', (evt) => {
   evt.preventDefault();
 
-  cardListSection.addItem(new Card({
+  const card = new Card({
     name: elementTitle.value,
     link: elementLink.value,
-  }, 'element-template'));
+  }, 'element-template', (evt) => {
+    photoPopup.open(evt);
+  });
+
+  cardListSection.addItem(card.generateCard());
 
   elementPopup.close();
 });
@@ -53,10 +62,10 @@ const elementPopup = new PopupWithForm('.page__popup-element', (evt) => {
 // set Common page button handlers
 const setupButtonHandlers = () => {
   editButton.addEventListener('click', evt => {
-    profileName.value = profileTitle.textContent;
-    profileJob.value = profileSubtitle.textContent;
+    userInfo.setUserInfo(profileTitle.textContent, profileSubtitle.textContent);
     profilePopup.open();
   });
+
   addButton.addEventListener('click', evt => {
     elementPopup.open();
   });
