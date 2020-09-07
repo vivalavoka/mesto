@@ -1,22 +1,17 @@
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
 
-// Initialize element template
-export const elementList = document.querySelector('.elements');
-
 // Initialize profile output
 export const profileTitle = document.querySelector('.profile__title');
 export const profileSubtitle = document.querySelector('.profile__subtitle');
 
 // Profile popup part
-export const profilePopup = document.querySelector('.page__popup-profile');
 export const profileForm = document.forms.namedItem('profile-form');
 
 export const profileName = document.querySelector('#profile-name');
 export const profileJob = document.querySelector('#profile-job');
 
 // Element popup part
-export const elementPopup = document.querySelector('.page__popup-element');
 export const elementForm = document.forms.namedItem('element-form');
 
 export const elementTitle = document.querySelector('#element-title');

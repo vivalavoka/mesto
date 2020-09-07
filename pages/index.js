@@ -1,35 +1,35 @@
-import './index.css';
+// import './index.css';
 
-import {openPopup, closePopup} from '../utils/utils.js';
 import {
   initialCards,
   editButton,
   addButton,
-  elementList,
   profileTitle,
   profileSubtitle,
-  profilePopup,
   profileForm,
   profileName,
   profileJob,
-  elementPopup,
   elementForm,
   elementTitle,
   elementLink,
   formValidatorOptions,
-} from '../utils/contants.js';
+} from '../utils/constants.js';
 
 import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
 const cardListSection = new Section({
-  data: initialCards,
+  items: initialCards,
   renderer: (item) => {
     const card = new Card(item, 'element-template');
     return card.generateCard();
   },
-}, elementList);
+}, '.elements');
+
+const profilePopup = new Popup('.page__popup-profile');
+const elementPopup = new Popup('.page__popup-element');
 
 const profileFormSubmitHandler = evt => {
   evt.preventDefault();
@@ -37,7 +37,7 @@ const profileFormSubmitHandler = evt => {
   profileTitle.textContent = profileName.value;
   profileSubtitle.textContent = profileJob.value;
 
-  closePopup(document.querySelector('.popup_opened'));
+  profilePopup.close();
 }
 
 const elementFormSubmitHandler = evt => {
@@ -48,7 +48,7 @@ const elementFormSubmitHandler = evt => {
     link: elementLink.value,
   }, 'element-template'));
 
-  closePopup(document.querySelector('.popup_opened'));
+  elementPopup.close();
 }
 
 // set Common page button handlers
@@ -56,10 +56,10 @@ const setupButtonHandlers = () => {
   editButton.addEventListener('click', evt => {
     profileName.value = profileTitle.textContent;
     profileJob.value = profileSubtitle.textContent;
-    openPopup(profilePopup);
+    profilePopup.open();
   });
   addButton.addEventListener('click', evt => {
-    openPopup(elementPopup);
+    elementPopup.open();
   });
 }
 
@@ -67,8 +67,8 @@ const setupButtonHandlers = () => {
 const setupCommonHandlers = () => {
   setupButtonHandlers();
 
-  profilePopup.querySelector('.popup__form').addEventListener('submit', profileFormSubmitHandler);
-  elementPopup.querySelector('.popup__form').addEventListener('submit', elementFormSubmitHandler);
+  profilePopup._popup.querySelector('.popup__form').addEventListener('submit', profileFormSubmitHandler);
+  elementPopup._popup.querySelector('.popup__form').addEventListener('submit', elementFormSubmitHandler);
 }
 
 setupCommonHandlers();
