@@ -8,8 +8,6 @@ import {
   profileSubtitle,
   profileForm,
   elementForm,
-  elementTitle,
-  elementLink,
   formValidatorOptions,
 } from '../utils/constants.js';
 
@@ -20,41 +18,32 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
+const createCard = (item) => {
+  return (new Card(item, 'element-template', (data) => {
+    photoPopup.open(data);
+  })).generateCard();
+};
+
 const cardListSection = new Section({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, 'element-template', (evt) => {
-      photoPopup.open(evt);
-    });
-    return card.generateCard();
-  },
+  renderer: (item) => createCard(item),
 }, '.elements');
 
 const userInfo = new UserInfo('#profile-name', '#profile-job');
 const photoPopup = new PopupWithImage('.page__popup-photo');
 
-const profilePopup = new PopupWithForm('.page__popup-profile', (evt) => {
-  evt.preventDefault();
-
-  const {name, job} = userInfo.getUserInfo();
-
-  profileTitle.textContent = name;
-  profileSubtitle.textContent = job;
+const profilePopup = new PopupWithForm('.page__popup-profile', (values) => {
+  profileTitle.textContent = values['profile-name'];
+  profileSubtitle.textContent = values['profile-job'];
 
   profilePopup.close();
 });
 
-const elementPopup = new PopupWithForm('.page__popup-element', (evt) => {
-  evt.preventDefault();
-
-  const card = new Card({
-    name: elementTitle.value,
-    link: elementLink.value,
-  }, 'element-template', (evt) => {
-    photoPopup.open(evt);
-  });
-
-  cardListSection.addItem(card.generateCard());
+const elementPopup = new PopupWithForm('.page__popup-element', (values) => {
+  cardListSection.addItem(createCard({
+    name: values['element-title'],
+    link: values['element-link'],
+  }));
 
   elementPopup.close();
 });

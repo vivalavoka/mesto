@@ -11,9 +11,6 @@ export const profileForm = document.forms.namedItem('profile-form');
 // Element popup part
 export const elementForm = document.forms.namedItem('element-form');
 
-export const elementTitle = document.querySelector('#element-title');
-export const elementLink = document.querySelector('#element-link');
-
 // Photo popup part
 export const photoPopup = document.querySelector('.page__popup-photo');
 

@@ -1,6 +1,8 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   _handleEscClose(evt) {
@@ -10,7 +12,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    document.addEventListener('keyup', this._handleEscClose.bind(this));
+    document.addEventListener('keyup', this._handleEscClose);
     this._popup.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup__close-button')
         || evt.target.classList.contains('popup')) {
