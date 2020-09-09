@@ -17,8 +17,8 @@ export const photoPopup = document.querySelector('.page__popup-photo');
 // Forms options
 export const formValidatorOptions = {
   submitButtonSelector: '.popup__submit',
-  initialInputClass: '.input_state_initial',
-  invalidInputClass: '.input_state_invalid',
+  initialInputClass: 'input_state_initial',
+  invalidInputClass: 'input_state_invalid',
   disableButtonClass: 'popup__submit_state_disable',
   enableButtonClass: 'popup__submit_state_enable',
 };

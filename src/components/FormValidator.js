@@ -36,6 +36,11 @@ export default class FormValidator {
     return this._inputList.some((inputElement) => !inputElement.validity.valid);
   };
 
+  checkValidation() {
+    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._toggleButtonState(buttonElement);
+  }
+
   _toggleButtonState(buttonElement) {
     if (this._hasInvalidInput()) {
       buttonElement.classList.remove(this._enableButtonClass);
