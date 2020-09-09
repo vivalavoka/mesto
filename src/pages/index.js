@@ -4,8 +4,6 @@ import {
   initialCards,
   editButton,
   addButton,
-  profileTitle,
-  profileSubtitle,
   profileForm,
   elementForm,
   formValidatorOptions,
@@ -54,7 +52,6 @@ const elementPopup = new PopupWithForm('.page__popup-element', (values) => {
   }));
 
   elementPopup.close();
-  this._form.reset();
 
   elementFormValidator.checkValidation();
 });
@@ -62,6 +59,10 @@ const elementPopup = new PopupWithForm('.page__popup-element', (values) => {
 // set Common page button handlers
 const setupButtonHandlers = () => {
   editButton.addEventListener('click', evt => {
+    const {name, job} = userInfo.getUserInfo();
+    profilePopup.inputs['profile-name'].value = name;
+    profilePopup.inputs['profile-job'].value = job;
+
     profilePopup.open();
   });
 
