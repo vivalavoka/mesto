@@ -9,12 +9,21 @@ import {
   formValidatorOptions,
 } from '../utils/constants.js';
 
+import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15',
+  headers: {
+    authorization: '',
+    'Content-Type': 'application/json'
+  }
+});
 
 const createCard = (item) => {
   return (new Card(item, 'element-template', (data) => {
