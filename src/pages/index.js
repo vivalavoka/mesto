@@ -4,6 +4,7 @@ import {
   initialCards,
   editButton,
   addButton,
+  avatarEditButton,
   profileForm,
   elementForm,
   avatarForm,
@@ -18,13 +19,13 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
-// const api = new Api({
-//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15',
-//   headers: {
-//     authorization: '',
-//     'Content-Type': 'application/json'
-//   }
-// });
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15',
+  headers: {
+    authorization: '359b95d1-25dd-40f7-8f18-447a7bfe930e',
+    'Content-Type': 'application/json'
+  }
+});
 
 const createCard = (item) => {
   return (new Card(item, 'element-template', (data) => {
@@ -68,6 +69,12 @@ const elementPopup = new PopupWithForm('.page__popup-element', (values) => {
   elementFormValidator.checkValidation();
 });
 
+const avatarPopup = new PopupWithForm('.page__popup-avatar', (values) => {
+  avatarPopup.close();
+
+  avatarFormValidator.checkValidation();
+});
+
 // set Common page button handlers
 const setupButtonHandlers = () => {
   editButton.addEventListener('click', evt => {
@@ -81,6 +88,10 @@ const setupButtonHandlers = () => {
   addButton.addEventListener('click', evt => {
     elementPopup.open();
   });
+
+  avatarEditButton.addEventListener('click', evt => {
+    avatarPopup.open();
+  })
 }
 
 // Initialize common handlers

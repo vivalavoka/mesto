@@ -1,5 +1,6 @@
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
+export const avatarEditButton = document.querySelector('.profile__edit-avatar');
 
 // Initialize profile output
 export const profileTitle = document.querySelector('.profile__title');
