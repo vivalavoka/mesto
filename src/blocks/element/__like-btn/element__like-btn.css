@@ -1,0 +1,9 @@
+.element__like-btn {
+  width: 22px;
+  height: 20px;
+  margin-bottom: 3px;
+}
+
+.element__like-btn::after {
+  background-size: 22px 20px;
+}

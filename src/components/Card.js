@@ -16,7 +16,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__like').addEventListener('click', this._handleLikeClick);
+    this._element.querySelector('.element__like-btn').addEventListener('click', this._handleLikeClick);
 
     this._element.querySelector('.element__delete').addEventListener('click', this._handleDeleteClick);
 
