@@ -35,7 +35,7 @@
     <div class="popup__container">
       <button type="button" class="button button_action_cross popup__close-button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="profile-form" class="popup__form" method="GET" novalidate>
+      <form name="profile-form" class="popup__form" novalidate>
         <label class="popup__input-wrap">
           <input name="profile-name" id="profile-name" class="input popup__input input_state_initial" type="text" placeholder="Имя" required minlength="2" maxlength="40">
           <span id="profile-name-error" class="popup__input-error"></span>
@@ -48,11 +48,20 @@
       </form>
     </div>
   </section>
+  <section class="popup page__popup-confirm popup_opened">
+    <div class="popup__container">
+      <button type="button" class="button button_action_cross popup__close-button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form name="profile-form" class="popup__form" novalidate>
+        <button class="button popup__submit popup__submit_state_enable" type="submit">Да</button>
+      </form>
+    </div>
+  </section>
   <section class="popup page__popup-element">
     <div class="popup__container">
       <button type="button" class="button button_action_cross popup__close-button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form name="element-form" class="popup__form" method="GET" novalidate>
+      <form name="element-form" class="popup__form" novalidate>
         <label class="popup__input-wrap">
           <input name="element-title" id="element-title" class="input popup__input input_state_initial" type="text" placeholder="Название" required minlength="1" maxlength="30">
           <span id="element-title-error" class="popup__input-error"></span>
