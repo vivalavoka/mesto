@@ -11,6 +11,9 @@ export const profileForm = document.forms.namedItem('profile-form');
 // Element popup part
 export const elementForm = document.forms.namedItem('element-form');
 
+// Avatar popup part
+export const avatarForm = document.forms.namedItem('avatar-form');
+
 // Photo popup part
 export const photoPopup = document.querySelector('.page__popup-photo');
 

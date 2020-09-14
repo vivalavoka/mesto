@@ -6,6 +6,7 @@ import {
   addButton,
   profileForm,
   elementForm,
+  avatarForm,
   formValidatorOptions,
 } from '../utils/constants.js';
 
@@ -34,6 +35,8 @@ const createCard = (item) => {
 const profileFormValidator = new FormValidator(formValidatorOptions, profileForm);
 
 const elementFormValidator = new FormValidator(formValidatorOptions, elementForm);
+
+const avatarFormValidator = new FormValidator(formValidatorOptions, avatarForm);
 
 const cardListSection = new Section({
   items: initialCards,
@@ -85,5 +88,6 @@ setupButtonHandlers();
 
 profileFormValidator.enableValidation();
 elementFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 cardListSection.renderItems();
