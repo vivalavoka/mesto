@@ -28,7 +28,13 @@ const api = new Api({
 });
 
 const createCard = (item) => {
-  return (new Card(item, 'element-template', (data) => {
+  const {id} = userInfo.getUserInfo();
+  return (new Card({
+    name: item.name,
+    link: item.link,
+    likeCount: item.likes.length,
+    isOwner: item.owner._id === id,
+  }, 'element-template', (data) => {
     photoPopup.open(data);
   })).generateCard();
 };
@@ -112,8 +118,8 @@ api.getInitialCards().then(items => {
   cardListSection.renderItems();
 });
 
-
 api.getProfile().then(data => {
+  userInfo.setUniqId(data._id);
   userInfo.setUserInfo(data.name, data.about);
   userInfo.setAvatar(data.avatar);
 });

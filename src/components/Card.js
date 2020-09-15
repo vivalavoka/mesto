@@ -2,7 +2,8 @@ export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes;
+    this._likeCount = data.likeCount;
+    this._isOwner = data.isOwner;
 
     this._handleCardClick = handleCardClick;
 
@@ -41,11 +42,15 @@ export default class Card {
     const title = this._element.querySelector('.element__title');
     const photo = this._element.querySelector('.element__photo');
     const likeCount = this._element.querySelector('.element__like-count');
+    const deleteBtn = this._element.querySelector('.element__delete');
 
     title.textContent = this._name;
     photo.alt = this._name;
     photo.src = this._link;
-    likeCount.textContent = this._likes.length;
+    likeCount.textContent = this._likeCount;
+    if (!this._isOwner) {
+      deleteBtn.classList.add('button_state_invisible');
+    }
 
     this._setEventListeners();
 

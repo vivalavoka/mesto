@@ -4,6 +4,8 @@
 @import url(./_action/button_action_fill-heart.css);
 @import url(./_action/button_action_trash.css);
 
+@import url(./_state/button_state_invisible.css);
+
 .button {
   margin: 0;
   padding: 0;
