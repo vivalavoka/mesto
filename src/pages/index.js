@@ -113,7 +113,7 @@ avatarFormValidator.enableValidation();
 
 api.getInitialCards().then(items => {
   cardListSection = new Section({
-    items,
+    items: items.reverse(),
     renderer: (item) => createCard(item),
   }, '.elements');
   cardListSection.renderItems();
