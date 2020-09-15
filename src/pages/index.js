@@ -57,33 +57,32 @@ const photoPopup = new PopupWithImage('.page__popup-photo');
 const profilePopup = new PopupWithForm('.page__popup-profile', (values) => {
   const name = values['profile-name'];
   const about = values['profile-about'];
+  profilePopup.showLoader();
 
   api.updateProfile(name, about).then(data => {
     userInfo.setUserInfo(data.name, data.about)
+    profilePopup.close();
   });
-
-  profilePopup.close();
-  profileFormValidator.checkValidation();
 });
 
 const elementPopup = new PopupWithForm('.page__popup-element', (values) => {
+  elementPopup.showLoader();
 
   api.addCard(values['element-title'], values['element-link']).then(response => {
     cardListSection.addItem(createCard(response));
-  })
-
-  elementPopup.close();
-  elementFormValidator.checkValidation();
+    elementPopup.close();
+    elementFormValidator.checkValidation();
+  });
 });
 
 const avatarPopup = new PopupWithForm('.page__popup-avatar', (values) => {
-  avatarPopup.close();
+  avatarPopup.showLoader();
 
   api.updateAvatar(values['avatar-link']).then(response => {
     userInfo.setAvatar(response.avatar);
+    avatarPopup.close();
+    avatarFormValidator.checkValidation();
   });
-
-  avatarFormValidator.checkValidation();
 });
 
 // set Common page button handlers
