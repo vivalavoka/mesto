@@ -79,7 +79,9 @@ const elementPopup = new PopupWithForm('.page__popup-element', (values) => {
 const avatarPopup = new PopupWithForm('.page__popup-avatar', (values) => {
   avatarPopup.close();
 
-  userInfo.setAvatar(values['avatar-link']);
+  api.updateAvatar(values['avatar-link']).then(response => {
+    userInfo.setAvatar(response.avatar);
+  });
 
   avatarFormValidator.checkValidation();
 });
