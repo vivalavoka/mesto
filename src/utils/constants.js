@@ -1,3 +1,6 @@
+export const cohortId = 'cohort-15';
+export const authToken = '359b95d1-25dd-40f7-8f18-447a7bfe930e';
+
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
 export const avatarEditButton = document.querySelector('.profile__edit-avatar');
