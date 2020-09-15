@@ -112,8 +112,9 @@ elementFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
 api.getInitialCards().then(items => {
+  const sortedCards = items.sort((cardA, cardB) => new Date(cardA.createdAt) - new Date(cardB.createdAt));
   cardListSection = new Section({
-    items: items.reverse(),
+    items: sortedCards,
     renderer: (item) => createCard(item),
   }, '.elements');
   cardListSection.renderItems();
