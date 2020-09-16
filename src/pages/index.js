@@ -20,6 +20,8 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
+let cardListSection;
+
 const api = new Api({
   baseUrl: `https://mesto.nomoreparties.co/v1/${cohortId}`,
   headers: {
@@ -27,25 +29,32 @@ const api = new Api({
   }
 });
 
+const profileFormValidator = new FormValidator(formValidatorOptions, profileForm);
+const elementFormValidator = new FormValidator(formValidatorOptions, elementForm);
+const avatarFormValidator = new FormValidator(formValidatorOptions, avatarForm);
+
 const createCard = (item) => {
   const {id} = userInfo.getUserInfo();
-  return (new Card({
+  const card = new Card({
+    id: item._id,
     name: item.name,
     link: item.link,
     likeCount: item.likes.length,
     isOwner: item.owner._id === id,
-  }, 'element-template', (data) => {
-    photoPopup.open(data);
-  })).generateCard();
+  }, 'element-template', {
+    handleCardDelete: (cardId) => {
+      confirmPopup.open(cardId);
+    },
+    handleCardLike: (cardId) => {
+      card.likeCard();
+      console.log(cardId);
+    },
+    handleCardClick: (data) => {
+      photoPopup.open(data);
+    },
+  });
+  return card.generateCard();
 };
-
-const profileFormValidator = new FormValidator(formValidatorOptions, profileForm);
-
-const elementFormValidator = new FormValidator(formValidatorOptions, elementForm);
-
-const avatarFormValidator = new FormValidator(formValidatorOptions, avatarForm);
-
-let cardListSection;
 
 const userInfo = new UserInfo({
   name: '.profile__title',
@@ -82,6 +91,12 @@ const avatarPopup = new PopupWithForm('.page__popup-avatar', (values) => {
     userInfo.setAvatar(response.avatar);
     avatarPopup.close();
     avatarFormValidator.checkValidation();
+  });
+});
+
+const confirmPopup = new PopupWithForm('.page__popup-confirm', (values) => {
+  api.deleteCard(cardId).then(data => {
+    card.removeCard();
   });
 });
 
