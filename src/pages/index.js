@@ -15,6 +15,7 @@ import {
 import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Card from '../components/Card.js';
@@ -43,6 +44,13 @@ const createCard = (item) => {
     isOwner: item.owner._id === id,
   }, 'element-template', {
     handleCardDelete: (cardId) => {
+      confirmPopup.setSubmitCallback(() => {
+        confirmPopup.showLoader();
+        api.deleteCard(cardId).then(data => {
+          card.removeCard();
+          confirmPopup.close();
+        });
+      });
       confirmPopup.open(cardId);
     },
     handleCardLike: (cardId) => {
@@ -94,11 +102,7 @@ const avatarPopup = new PopupWithForm('.page__popup-avatar', (values) => {
   });
 });
 
-const confirmPopup = new PopupWithForm('.page__popup-confirm', (values) => {
-  api.deleteCard(cardId).then(data => {
-    card.removeCard();
-  });
-});
+const confirmPopup = new PopupWithSubmit('.page__popup-confirm');
 
 // set Common page button handlers
 const setupButtonHandlers = () => {
