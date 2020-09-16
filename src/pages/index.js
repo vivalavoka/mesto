@@ -37,11 +37,12 @@ const avatarFormValidator = new FormValidator(formValidatorOptions, avatarForm);
 const createCard = (item) => {
   const {id} = userInfo.getUserInfo();
   const card = new Card({
+    userId: id,
     id: item._id,
     name: item.name,
     link: item.link,
-    likeCount: item.likes.length,
-    isOwner: item.owner._id === id,
+    likes: item.likes,
+    owner: item.owner,
   }, 'element-template', {
     handleCardDelete: (cardId) => {
       confirmPopup.setSubmitCallback(() => {
@@ -54,8 +55,14 @@ const createCard = (item) => {
       confirmPopup.open(cardId);
     },
     handleCardLike: (cardId) => {
-      card.likeCard();
-      console.log(cardId);
+      api.likeCard(cardId).then(data => {
+        card.updateLikes(data.likes);
+      });
+    },
+    handleCardDislike: (cardId) => {
+      api.dislikeCard(cardId).then(data => {
+        card.updateLikes(data.likes);
+      });
     },
     handleCardClick: (data) => {
       photoPopup.open(data);
